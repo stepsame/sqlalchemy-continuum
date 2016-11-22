@@ -210,7 +210,7 @@ class ActivityBase(object):
 
     @hybrid_property
     def actor(self):
-        self.transaction.user
+        return self.transaction.user
 
 
 class ActivityFactory(ModelFactory):
@@ -246,6 +246,10 @@ class ActivityFactory(ModelFactory):
             target_id = sa.Column(sa.BigInteger)
 
             target_tx_id = sa.Column(sa.BigInteger)
+
+            timestamp = sa.Column(sa.DateTime)
+
+            actor_id = sa.Column(sa.BigInteger)
 
             def _calculate_tx_id(self, obj):
                 session = sa.orm.object_session(self)
